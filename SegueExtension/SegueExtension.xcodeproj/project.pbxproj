@@ -11,6 +11,8 @@
 		BCD23E291D13F58300F4E25E /* SegueExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD23E1E1D13F58300F4E25E /* SegueExtension.framework */; };
 		BCD23E2E1D13F58300F4E25E /* SegueExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E2D1D13F58300F4E25E /* SegueExtensionTests.swift */; };
 		BCD23E391D13F5E000F4E25E /* SegueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E381D13F5E000F4E25E /* SegueExtension.swift */; };
+		BCD23E4E1D1414F300F4E25E /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E4D1D1414F300F4E25E /* TestedClass.swift */; };
+		BCD23E561D14469D00F4E25E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCD23E4F1D142B6500F4E25E /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,8 @@
 		BCD23E2D1D13F58300F4E25E /* SegueExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueExtensionTests.swift; sourceTree = "<group>"; };
 		BCD23E2F1D13F58300F4E25E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCD23E381D13F5E000F4E25E /* SegueExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueExtension.swift; sourceTree = "<group>"; };
+		BCD23E4D1D1414F300F4E25E /* TestedClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedClass.swift; sourceTree = "<group>"; };
+		BCD23E4F1D142B6500F4E25E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +87,9 @@
 		BCD23E2C1D13F58300F4E25E /* SegueExtensionTests */ = {
 			isa = PBXGroup;
 			children = (
+				BCD23E4F1D142B6500F4E25E /* Main.storyboard */,
 				BCD23E2D1D13F58300F4E25E /* SegueExtensionTests.swift */,
+				BCD23E4D1D1414F300F4E25E /* TestedClass.swift */,
 				BCD23E2F1D13F58300F4E25E /* Info.plist */,
 			);
 			path = SegueExtensionTests;
@@ -187,6 +193,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCD23E561D14469D00F4E25E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCD23E2E1D13F58300F4E25E /* SegueExtensionTests.swift in Sources */,
+				BCD23E4E1D1414F300F4E25E /* TestedClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

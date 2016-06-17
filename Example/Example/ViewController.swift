@@ -9,20 +9,40 @@
 import UIKit
 import SegueExtension
 
-class ViewController: UIViewController {
+class FirstViewController: UIViewController {
 
+    var result: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        UIViewController.printHello()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
+    override func viewWillAppear(animated: Bool) {
+        self.performSegueWithIdentifierSE("TestSegueID", sender: "SomeSender"){_, _ in
+            print("It's work")
+            self.result = "It's work"
+        }
+        print(self.result)
+        self.performSegueWithIdentifierSE("TestSegueID", sender: "SomeSender"){_, _ in
+            print("It's work second time")
+        }
+        print(self.result)
+        self.performSegueWithIdentifierSE("TestSegueID", sender: "SomeSender", withSegueHandler: nil)
+    }
+    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//      //  super.prepareForSegue(segue, sender: sender)
+//        print("Prepare For segue")
+//    }
+    override func viewDidAppear(animated: Bool) {
+        print(self.result)
+    }
 }
 

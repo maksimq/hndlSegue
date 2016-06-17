@@ -16,6 +16,7 @@
 		BCD23DDA1D13F2E900F4E25E /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23DD91D13F2E900F4E25E /* ExampleUITests.swift */; };
 		BCD23E471D13FC5A00F4E25E /* SegueExtension.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = BCD23E401D13FB8900F4E25E /* SegueExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BCD23E4A1D13FD6600F4E25E /* SegueExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD23E401D13FB8900F4E25E /* SegueExtension.framework */; };
+		BCD23E521D14348300F4E25E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E511D14348300F4E25E /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		BCD23DD91D13F2E900F4E25E /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		BCD23DDB1D13F2E900F4E25E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCD23E3A1D13FB8900F4E25E /* SegueExtension.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SegueExtension.xcodeproj; path = ../SegueExtension/SegueExtension.xcodeproj; sourceTree = "<group>"; };
+		BCD23E511D14348300F4E25E /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			children = (
 				BCD23DB91D13F2E900F4E25E /* AppDelegate.swift */,
 				BCD23DBB1D13F2E900F4E25E /* ViewController.swift */,
+				BCD23E511D14348300F4E25E /* SecondViewController.swift */,
 				BCD23DBD1D13F2E900F4E25E /* Main.storyboard */,
 				BCD23DC01D13F2E900F4E25E /* Assets.xcassets */,
 				BCD23DC21D13F2E900F4E25E /* LaunchScreen.storyboard */,
@@ -330,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCD23E521D14348300F4E25E /* SecondViewController.swift in Sources */,
 				BCD23DBC1D13F2E900F4E25E /* ViewController.swift in Sources */,
 				BCD23DBA1D13F2E900F4E25E /* AppDelegate.swift in Sources */,
 			);
