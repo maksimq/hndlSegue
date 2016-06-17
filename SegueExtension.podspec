@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SegueExtension"
-  s.version      = "0.1.0"
+  s.version      = "0.1"
   s.summary      = "SegueExtension make work this segues easy"
 
   s.description  = <<-DESC
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "8.0"
 
-  s.source           = { :git => 'https://github.com/matyushenkoMaxim/SegueExtension.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/matyushenkoMaxim/SegueExtension.git', :tag => s.version }
 
   s.source_files  = "SegueExtension/SegueExtension/*.swift"
   s.exclude_files = "SegueExtension/Exclude"
