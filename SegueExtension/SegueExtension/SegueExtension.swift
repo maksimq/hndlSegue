@@ -15,10 +15,10 @@ extension UIViewController {
         struct Origin {
             static var originImplementation: IMP!
         }
-        Origin.originImplementation = method_getImplementation(class_getInstanceMethod(self, #selector(UIViewController.prepareForSegue(_:sender:))))
+        Origin.originImplementation = method_getImplementation(class_getInstanceMethod(self, Selector("prepareForSegue:sender:")))
         
         if let handler = handler {
-            let originalSelector = #selector(UIViewController.prepareForSegue(_:sender:))
+            let originalSelector = Selector("prepareForSegue:sender:")
             
             let originalMethod = class_getInstanceMethod(self, originalSelector)
             let bitHandler = unsafeBitCast(handler, AnyObject.self)
@@ -27,7 +27,7 @@ extension UIViewController {
             method_setImplementation(originalMethod, swizzledMethodIMP)
 
         } else {
-            let originalSelector = #selector(UIViewController.prepareForSegue(_:sender:))
+            let originalSelector = Selector("prepareForSegue:sender:")
             let originalMethod = class_getInstanceMethod(self, originalSelector)
             method_setImplementation(originalMethod, Origin.originImplementation)
         }

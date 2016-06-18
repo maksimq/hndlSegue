@@ -20,7 +20,7 @@ class SegueExtensionTests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        self.storyboard = UIStoryboard.init(name: "MainStoryboard", bundle: NSBundle(forClass: self.dynamicType))
         
         testedController = storyboard?.instantiateViewControllerWithIdentifier("iControllerID") as? TestedViewController
         
@@ -35,12 +35,10 @@ class SegueExtensionTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
 
-        testedController?.testedMethod()
-
-        //        let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
-//        dispatch_after(time, dispatch_get_main_queue()){
-//            XCTAssertEqual(self.testedObject.result, "Ok")
-//        }
+        testedController?.testedMethod(){_,_ in 
+            self.testedController!.result = "Ok"
+        }
+        XCTAssertEqual(self.testedController!.result, "Ok")
     }
     
     func testPerformanceExample() {

@@ -19,11 +19,9 @@ class TestedViewController: UIViewController {
         print("View did Load")
     }
     
-    func testedMethod() {
+    func testedMethod( handler: (@convention(block) (segue: UIStoryboardSegue, sender:AnyObject?) -> Void)) {
         print(self.valueForKey("storyboardSegueTemplates"))
-        self.performSegueWithIdentifierSE("TestSegueID", sender: "SomeSender") { segue, sender in
-            self.result = "Ok"
-        }
+        self.performSegueWithIdentifierSE("TestSegueID", sender: "SomeSender", withSegueHandler:  handler)
     }
 }
 
