@@ -7,7 +7,7 @@
         <!--Tested View Controller-->
         <scene sceneID="pAj-9x-Vdf">
             <objects>
-                <viewController storyboardIdentifier="iControllerID" id="pAn-8s-G7W" customClass="TestedViewController" customModule="SegueExtensionTests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="testViewID" id="pAn-8s-G7W" customClass="TestedViewController" customModule="SegueExtensionTests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iFp-z0-172"/>
                         <viewControllerLayoutGuide type="bottom" id="AdV-gY-zaX"/>
@@ -18,7 +18,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="rm1-X3-MV0" kind="presentation" identifier="TestSegueID" id="WyV-aa-T4K"/>
+                        <segue destination="rm1-X3-MV0" kind="presentation" identifier="TestSegueID1" id="WyV-aa-T4K"/>
+                        <segue destination="rm1-X3-MV0" kind="showDetail" identifier="TestSegueID2" id="D2F-9H-684"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbK-EH-oln" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -28,7 +29,7 @@
         <!--Second View Controller-->
         <scene sceneID="3nr-gQ-Fya">
             <objects>
-                <viewController id="rm1-X3-MV0" customClass="SecondViewController" customModule="SegueExtensionTests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondViewID" id="rm1-X3-MV0" customClass="SecondViewController" customModule="SegueExtensionTests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2fX-Zx-nva"/>
                         <viewControllerLayoutGuide type="bottom" id="gCQ-hj-KB1"/>
@@ -41,7 +42,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Her-UD-xBS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="402"/>
+            <point key="canvasLocation" x="1056" y="470"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="WyV-aa-T4K"/>
+    </inferredMetricsTieBreakers>
 </document>

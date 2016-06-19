@@ -15,15 +15,16 @@ class SegueExtensionTests: XCTestCase {
     var storyboard: UIStoryboard?
     
     var testedController: TestedViewController?
-    
+    var secondViewController: SecondViewController?
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.storyboard = UIStoryboard.init(name: "MainStoryboard", bundle: NSBundle(forClass: self.dynamicType))
         
-        testedController = storyboard?.instantiateViewControllerWithIdentifier("iControllerID") as? TestedViewController
-        
+        testedController = storyboard?.instantiateViewControllerWithIdentifier("testViewID") as? TestedViewController
+        secondViewController = storyboard?.instantiateViewControllerWithIdentifier("SecondViewID") as? SecondViewController
+        secondViewController?.desc = "Second"
     }
     
     override func tearDown() {
@@ -34,11 +35,19 @@ class SegueExtensionTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-
-        testedController?.testedMethod(){_,_ in 
-            self.testedController!.result = "Ok"
-        }
-        XCTAssertEqual(self.testedController!.result, "Ok")
+        
+        // Test without handler
+        testedController?.testedMethod("SomeSenderSecond")
+        XCTAssertEqual(self.testedController!.result, true)
+        XCTAssertEqual(self.testedController!.sender as? String, "SomeSenderSecond")
+  
+        testedController?.testedMethod()
+        XCTAssertEqual(self.testedController!.result, true)
+        XCTAssertEqual(self.testedController!.sender as? String, nil)
+        
+        testedController?.testedMethod(nil)
+        XCTAssertNil(self.testedController!.sender)
+        
     }
     
     func testPerformanceExample() {

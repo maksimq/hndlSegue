@@ -567,6 +567,7 @@
 				BCD23DE01D13F2E900F4E25E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BCD23DE11D13F2E900F4E25E /* Build configuration list for PBXNativeTarget "ExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -575,6 +576,7 @@
 				BCD23DE31D13F2E900F4E25E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BCD23DE41D13F2E900F4E25E /* Build configuration list for PBXNativeTarget "ExampleUITests" */ = {
 			isa = XCConfigurationList;
@@ -583,6 +585,7 @@
 				BCD23DE61D13F2E900F4E25E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
