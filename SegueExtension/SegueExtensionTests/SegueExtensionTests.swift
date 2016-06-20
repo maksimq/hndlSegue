@@ -38,12 +38,16 @@ class SegueExtensionTests: XCTestCase {
         
         // Test without handler
         testedController?.testedMethod("SomeSenderSecond")
-        XCTAssertEqual(self.testedController!.result, true)
+        XCTAssertEqual(self.testedController!.result, "prepareForSegue")
         XCTAssertEqual(self.testedController!.sender as? String, "SomeSenderSecond")
   
+        self.testedController?.result = ""
+        
         testedController?.testedMethod()
-        XCTAssertEqual(self.testedController!.result, true)
-        XCTAssertEqual(self.testedController!.sender as? String, nil)
+        XCTAssertEqual(self.testedController!.result, "HandlerWork")
+        XCTAssertEqual(self.testedController!.sender as? String, "SomeSender")
+        
+        self.testedController?.result = ""
         
         testedController?.testedMethod(nil)
         XCTAssertNil(self.testedController!.sender)

@@ -8,17 +8,38 @@
 
 import Foundation
 
-// extend UIViewController because methods prepareForSegue and performSegueWithId.. define here
+public typealias SegueHandler = (@convention(block) (segue: UIStoryboardSegue, sender:AnyObject?) -> Void)?
+
 extension UIViewController {
+    
+    private struct AssociatedKeys {
+        static let handlerDescription = "handlerBlockIMP"
+    }
+    
+    private var segueHandler: SegueHandler {
+        get {
+            let handler = objc_getAssociatedObject(self, AssociatedKeys.handlerDescription)
+            return unsafeBitCast(handler, SegueHandler.self)
+        }
+        set {
+            if let newValue = newValue {
+                let bitHandler = unsafeBitCast(newValue, AnyObject.self)
+                objc_setAssociatedObject(self, AssociatedKeys.handlerDescription, bitHandler, .OBJC_ASSOCIATION_COPY)
+            } else {
+                objc_setAssociatedObject(self, AssociatedKeys.handlerDescription, nil, .OBJC_ASSOCIATION_COPY)
+            }
+        }
+    }
     
     public override class func initialize() {
         struct Static {
-            static var token: dispatch_once_t = 0
+            static var performToken: dispatch_once_t = 0
+//            static var prepareToken: dispatch_once_t = 0
         }
         if self !== UIViewController.self {
             return
         }
-        dispatch_once(&Static.token) {
+        dispatch_once(&Static.performToken) {
             let originalSelector = Selector("performSegueWithIdentifier:sender:")
             let swizzledSelector = Selector("performSegueWithIdentifierSE:sender:")
             
@@ -34,39 +55,42 @@ extension UIViewController {
         }
     }
     
-    private class func swizzlePrepareForSegueWith(handler: (@convention(block) (weakSelf: UIViewController, segue: UIStoryboardSegue, sender:AnyObject?) -> Void)?) {
-        
-        struct Origin {
-            static var originImplementation: IMP?
+    private class func swizzlePrepareForSegue() {
+        struct Static {
+            static var prepareToken: dispatch_once_t = 0
         }
-        
-        if let handler = handler {
-            
+        dispatch_once(&Static.prepareToken) {
             let originalSelector = Selector("prepareForSegue:sender:")
-            Origin.originImplementation = method_getImplementation(class_getInstanceMethod(self, originalSelector))
+            let swizzledSelector = Selector("prepareForSegueSE:sender:")
             
             let originalMethod = class_getInstanceMethod(self, originalSelector)
-            let bitHandler = unsafeBitCast(handler, AnyObject.self)
-            let swizzledMethodIMP = imp_implementationWithBlock(bitHandler)
+            let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
             
-            method_setImplementation(originalMethod, swizzledMethodIMP)
-        } else {
-            guard let originImplementation = Origin.originImplementation else {
-                return
+            let addMethod = class_addMethod(self, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
+            if addMethod {
+                class_replaceMethod(self, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod))
+            } else {
+                method_exchangeImplementations(originalMethod, swizzledMethod)
             }
-            let originalSelector = Selector("prepareForSegue:sender:")
-            let originalMethod = class_getInstanceMethod(self, originalSelector)
-            method_setImplementation(originalMethod, originImplementation)
         }
     }
     
     func performSegueWithIdentifierSE(identifier: String, sender: AnyObject?) {
-        self.dynamicType.swizzlePrepareForSegueWith(nil)
         self.performSegueWithIdentifierSE(identifier, sender: sender)
     }
     
-    public final func performSegueWithIdentifier(identifier: String, sender: AnyObject?, withHandler handler: (@convention(block) (weakSelf: UIViewController, segue: UIStoryboardSegue, sender:AnyObject?) -> Void)) {
-        self.dynamicType.swizzlePrepareForSegueWith(handler)
+    public final func performSegueWithIdentifier(identifier: String, sender: AnyObject?, withHandler handler: SegueHandler) {
+        self.dynamicType.swizzlePrepareForSegue()
+        segueHandler = handler
         self.performSegueWithIdentifierSE(identifier, sender: sender)
+    }
+    
+    func prepareForSegueSE(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let handler = segueHandler {
+            handler(segue: segue, sender: sender)
+            segueHandler = nil
+            return
+        }
+        self.prepareForSegueSE(segue, sender: sender)
     }
 }
