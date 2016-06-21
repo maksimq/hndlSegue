@@ -27,17 +27,25 @@ class TestedViewController: UIViewController {
         self.performSegueWithIdentifier("TestSegueID1", sender: sender)
     }
     
-    func testedMethod() {
-        self.performSegueWithIdentifier("TestSegueID1", sender: "SomeSender") {segue, sender in
+    func firstTest() {
+        self.performSegueWithIdentifier("TestSegueID1", sender: "SomeSender1") {segue, sender in
             if segue.sourceViewController !== self {
                 self.result = "Error"
                 return
             }
-            self.result = "HandlerWork"
+            self.result = "Handler for first segue"
             self.sender = sender
-            if let controller =  segue.destinationViewController as? SecondViewController {
-                controller.result = true
+        }
+    }
+    
+    func secondTest() {
+        self.performSegueWithIdentifier("TestSegueID1", sender: "SomeSender2") {segue, sender in
+            if segue.sourceViewController !== self {
+                self.result = "Error"
+                return
             }
+            self.result = "Handler for second segue"
+            self.sender = sender
         }
     }
     

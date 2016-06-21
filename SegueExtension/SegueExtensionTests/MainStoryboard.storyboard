@@ -19,7 +19,7 @@
                     </view>
                     <connections>
                         <segue destination="rm1-X3-MV0" kind="presentation" identifier="TestSegueID1" id="WyV-aa-T4K"/>
-                        <segue destination="rm1-X3-MV0" kind="showDetail" identifier="TestSegueID2" id="D2F-9H-684"/>
+                        <segue destination="rm1-X3-MV0" kind="showDetail" identifier="TestSegueID1" id="D2F-9H-684"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbK-EH-oln" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -46,6 +46,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="WyV-aa-T4K"/>
+        <segue reference="D2F-9H-684"/>
     </inferredMetricsTieBreakers>
 </document>

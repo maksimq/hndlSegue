@@ -10,31 +10,36 @@ import Foundation
 
 public typealias SegueHandler = (@convention(block) (segue: UIStoryboardSegue, sender:AnyObject?) -> Void)?
 
+
 extension UIViewController {
     
-    private struct AssociatedKeys {
-        static let handlerDescription = "handlerBlockIMP"
-    }
-    
-    private var segueHandler: SegueHandler {
-        get {
-            let handler = objc_getAssociatedObject(self, AssociatedKeys.handlerDescription)
-            return unsafeBitCast(handler, SegueHandler.self)
+    private class __HandlersPool: AnyObject {
+        private static var handlers = Dictionary<String,SegueHandler>()
+        static func setHandler(segueID: String, handler: SegueHandler) {
+            self.handlers[segueID] = handler
         }
-        set {
-            if let newValue = newValue {
-                let bitHandler = unsafeBitCast(newValue, AnyObject.self)
-                objc_setAssociatedObject(self, AssociatedKeys.handlerDescription, bitHandler, .OBJC_ASSOCIATION_COPY)
-            } else {
-                objc_setAssociatedObject(self, AssociatedKeys.handlerDescription, nil, .OBJC_ASSOCIATION_COPY)
-            }
+        static func getHandler(segueID: String) -> SegueHandler? {
+            return self.handlers[segueID]
         }
     }
+//    private struct AssociatedKeys {
+//        static let handlerPoolDescription = "segueHandlerPool"
+//    }
+//    
+//    private var handlerPool:__HandlersPool? {
+//        get {
+//            return objc_getAssociatedObject(self, AssociatedKeys.handlerPoolDescription) as? __HandlersPool
+//        }
+//        set {
+//            if let newValue = newValue {
+//                objc_setAssociatedObject(self, AssociatedKeys.handlerPoolDescription, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+//            }
+//        }
+//    }
     
     public override class func initialize() {
         struct Static {
             static var performToken: dispatch_once_t = 0
-//            static var prepareToken: dispatch_once_t = 0
         }
         if self !== UIViewController.self {
             return
@@ -81,16 +86,17 @@ extension UIViewController {
     
     public final func performSegueWithIdentifier(identifier: String, sender: AnyObject?, withHandler handler: SegueHandler) {
         self.dynamicType.swizzlePrepareForSegue()
-        segueHandler = handler
+        __HandlersPool.setHandler(identifier, handler: handler)
         self.performSegueWithIdentifierSE(identifier, sender: sender)
     }
     
     func prepareForSegueSE(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let handler = segueHandler {
-            handler(segue: segue, sender: sender)
-            segueHandler = nil
+        self.prepareForSegueSE(segue, sender: sender)
+        guard let identifier = segue.identifier else {
             return
         }
-        self.prepareForSegueSE(segue, sender: sender)
+        if let handler = __HandlersPool.getHandler(identifier) {
+            handler!(segue: segue, sender: sender)
+        }
     }
 }
