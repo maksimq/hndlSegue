@@ -23,12 +23,11 @@ class TestedViewController: UIViewController {
     }
     
     func testedMethod(sender: AnyObject?) {
-        print("Tested method without handler")
-        self.performSegueWithIdentifier("TestSegueID1", sender: sender)
+        self.performSegueWithIdentifier("FirstSegueID1", sender: sender)
     }
     
     func firstTest() {
-        self.performSegueWithIdentifier("TestSegueID1", sender: "SomeSender1") {segue, sender in
+        self.performSegueWithIdentifier("FirstSegueID1", sender: "SomeSender1") {segue, sender in
             if segue.sourceViewController !== self {
                 self.result = "Error"
                 return
@@ -39,7 +38,7 @@ class TestedViewController: UIViewController {
     }
     
     func secondTest() {
-        self.performSegueWithIdentifier("TestSegueID1", sender: "SomeSender2") {segue, sender in
+        self.performSegueWithIdentifier("FirstSegueID2", sender: "SomeSender2") {segue, sender in
             if segue.sourceViewController !== self {
                 self.result = "Error"
                 return
@@ -49,23 +48,39 @@ class TestedViewController: UIViewController {
         }
     }
     
+    func thirdTest() {
+        self.performSegueWithIdentifier("FirstSegueID1", sender: "SomeSenderSecond", withHandler: nil)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let controller = segue.sourceViewController as? TestedViewController {
             controller.result = "prepareForSegue"
             controller.sender = sender
-            if let controller =  segue.destinationViewController as? SecondViewController {
-                controller.result = true
-            }
         }
     }
 }
 
 class SecondViewController: UIViewController {
     
-    var result: Bool?
-    var desc: String?
-    
+    var result: String?
+    var sender: AnyObject?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func firstTest() {
+        self.performSegueWithIdentifier("SecondSegueID", sender: "SomeSender1") {segue, sender in
+            if segue.sourceViewController !== self {
+                self.result = "Error"
+                return
+            }
+            self.result = "Handler for first segue"
+            self.sender = sender
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("That")
     }
 }

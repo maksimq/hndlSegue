@@ -18,13 +18,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="rm1-X3-MV0" kind="presentation" identifier="TestSegueID1" id="WyV-aa-T4K"/>
-                        <segue destination="rm1-X3-MV0" kind="showDetail" identifier="TestSegueID1" id="D2F-9H-684"/>
+                        <segue destination="rm1-X3-MV0" kind="presentation" identifier="FirstSegueID1" id="WyV-aa-T4K"/>
+                        <segue destination="rm1-X3-MV0" kind="showDetail" identifier="FirstSegueID2" id="D2F-9H-684"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbK-EH-oln" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="306" y="402"/>
+            <point key="canvasLocation" x="316" y="394"/>
         </scene>
         <!--Second View Controller-->
         <scene sceneID="3nr-gQ-Fya">
@@ -39,13 +39,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="2gs-7V-i4P" kind="presentation" identifier="SecondSegueID" id="WLX-ve-V5B"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Her-UD-xBS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1056" y="470"/>
+            <point key="canvasLocation" x="1169" y="304"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4Py-rD-U5E">
+            <objects>
+                <viewController id="2gs-7V-i4P" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NVE-YD-Ag9"/>
+                        <viewControllerLayoutGuide type="bottom" id="vBP-U7-LIN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GKl-Cy-j5U">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eOw-I3-v1n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1900" y="295"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="D2F-9H-684"/>
+        <segue reference="WyV-aa-T4K"/>
     </inferredMetricsTieBreakers>
 </document>

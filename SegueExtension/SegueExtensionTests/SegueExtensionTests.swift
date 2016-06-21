@@ -24,7 +24,6 @@ class SegueExtensionTests: XCTestCase {
         
         testedController = storyboard?.instantiateViewControllerWithIdentifier("testViewID") as? TestedViewController
         secondViewController = storyboard?.instantiateViewControllerWithIdentifier("SecondViewID") as? SecondViewController
-        secondViewController?.desc = "Second"
     }
     
     override func tearDown() {
@@ -32,11 +31,8 @@ class SegueExtensionTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testFirstController() {
         
-        // Test without handler
         testedController?.testedMethod("SomeSenderSecond")
         XCTAssertEqual(self.testedController!.result, "prepareForSegue")
         XCTAssertEqual(self.testedController!.sender as? String, "SomeSenderSecond")
@@ -48,13 +44,17 @@ class SegueExtensionTests: XCTestCase {
         testedController?.secondTest()
         XCTAssertEqual(self.testedController!.result, "Handler for second segue")
         XCTAssertEqual(self.testedController!.sender as? String, "SomeSender2")
-//
-//        self.testedController?.result = ""
-//        
-//        testedController?.testedMethod(nil)
-//        XCTAssertNil(self.testedController!.sender)
-        
     }
+    
+    func testExample() {
+        
+        secondViewController?.firstTest()
+        XCTAssertEqual(self.secondViewController!.result, "Handler for first segue")
+        XCTAssertEqual(self.secondViewController!.sender as? String, "SomeSender1")
+        self.testedController?.result = ""
+
+    }
+    
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
