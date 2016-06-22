@@ -14,7 +14,7 @@ class SegueExtensionTests: XCTestCase {
     var window: UIWindow?
     var storyboard: UIStoryboard?
     
-    var testedController: TestedViewController?
+    var firstViewController: TestedViewController?
     var secondViewController: SecondViewController?
     override func setUp() {
         super.setUp()
@@ -22,7 +22,7 @@ class SegueExtensionTests: XCTestCase {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.storyboard = UIStoryboard.init(name: "MainStoryboard", bundle: NSBundle(forClass: self.dynamicType))
         
-        testedController = storyboard?.instantiateViewControllerWithIdentifier("testViewID") as? TestedViewController
+        firstViewController = storyboard?.instantiateViewControllerWithIdentifier("testViewID") as? TestedViewController
         secondViewController = storyboard?.instantiateViewControllerWithIdentifier("SecondViewID") as? SecondViewController
     }
     
@@ -31,36 +31,64 @@ class SegueExtensionTests: XCTestCase {
         super.tearDown()
     }
     
-    func testFirstController() {
+    func testForFirstController() {
         
-        testedController?.testedMethod("SomeSenderSecond")
-        XCTAssertEqual(self.testedController!.result, "prepareForSegue")
-        XCTAssertEqual(self.testedController!.sender as? String, "SomeSenderSecond")
+        firstViewController?.testedMethod("SomeSenderSecond")
+        checkAndReset(firstViewController!, result: "prepareForSegue", sender: "SomeSenderSecond")
         
-        testedController?.firstTest()
-        XCTAssertEqual(self.testedController!.result, "Handler for first segue")
-        XCTAssertEqual(self.testedController!.sender as? String, "SomeSender1")
+        firstViewController?.firstTest()
+        checkAndReset(firstViewController!, result: "Handler for first segue", sender: "SomeSender1")
         
-        testedController?.secondTest()
-        XCTAssertEqual(self.testedController!.result, "Handler for second segue")
-        XCTAssertEqual(self.testedController!.sender as? String, "SomeSender2")
+        firstViewController?.secondTest()
+        checkAndReset(firstViewController!, result: "Handler for second segue", sender: "SomeSender2")
     }
     
-    func testExample() {
+    func testForSecondController() {
         
         secondViewController?.firstTest()
-        XCTAssertEqual(self.secondViewController!.result, "Handler for first segue")
-        XCTAssertEqual(self.secondViewController!.sender as? String, "SomeSender1")
-        self.testedController?.result = ""
-
+        checkAndReset(secondViewController!, result: "Handler for first segue", sender: "SomeSender1")
     }
     
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-//        self.measureBlock {
-//            // Put the code you want to measure the time of here.
-//        }
+    func testPerformanceForFirstControllerOS() {
+        // invocate origin performSegeuWith..
+        // after that invocate performSegueWith..+handler
+        self.measureBlock { [weak self] in
+           
+            self!.firstViewController?.testedMethod("SomeSenderSecond")
+            self!.checkAndReset(self!.firstViewController!, result: "prepareForSegue", sender: "SomeSenderSecond")
+            
+            self!.firstViewController?.firstTest()
+            self!.checkAndReset(self!.firstViewController!, result: "Handler for first segue", sender: "SomeSender1")
+        }
     }
     
+    func testPerformanceForFirstControllerSS() {
+        // alternate method invocation 
+        // both methods invoked with handlers for different segeuIDs
+        self.measureBlock { [weak self] in
+            
+            self!.firstViewController?.firstTest()
+            self!.checkAndReset(self!.firstViewController!, result: "Handler for first segue", sender: "SomeSender1")
+            
+            self!.firstViewController?.secondTest()
+            self!.checkAndReset(self!.firstViewController!, result: "Handler for second segue", sender: "SomeSender2")
+        }
+    }
+    
+    func testPerformanceBothControllers() {
+        self.measureBlock{ [weak self] in
+            self!.firstViewController?.firstTest()
+            self!.checkAndReset(self!.firstViewController!, result: "Handler for first segue", sender: "SomeSender1")
+            
+            self!.secondViewController?.firstTest()
+            self!.checkAndReset(self!.secondViewController!, result: "Handler for first segue", sender: "SomeSender1")
+        }
+    }
+    
+    func checkAndReset(var controller: UIViewControllerTestDelegate, result: String?, sender: String?) {
+        XCTAssertEqual(controller.result, result)
+        XCTAssertEqual(controller.sender as? String, sender)
+        controller.result = nil
+        controller.sender = nil
+    }
 }

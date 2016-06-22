@@ -10,7 +10,12 @@ import Foundation
 import UIKit
 import XCTest
 
-class TestedViewController: UIViewController {
+protocol UIViewControllerTestDelegate {
+    var sender: AnyObject? {get set}
+    var result: String? {get set}
+}
+
+class TestedViewController: UIViewController, UIViewControllerTestDelegate {
     
     var result: String?
     var prepareForSegueCallCount: Int = 0
@@ -44,13 +49,14 @@ class TestedViewController: UIViewController {
                 return
             }
             self.result = "Handler for second segue"
-            self.sender = sender
         }
     }
     
     func thirdTest() {
         self.performSegueWithIdentifier("FirstSegueID1", sender: "SomeSenderSecond", withHandler: nil)
     }
+    
+//    override func
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let controller = segue.sourceViewController as? TestedViewController {
@@ -60,7 +66,7 @@ class TestedViewController: UIViewController {
     }
 }
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UIViewControllerTestDelegate {
     
     var result: String?
     var sender: AnyObject?

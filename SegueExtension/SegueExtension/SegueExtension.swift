@@ -34,7 +34,7 @@ extension UIViewController {
     private class func swizzlePrepareForSegue(inout dispOnce: dispatch_once_t) {
         dispatch_once(&dispOnce) {
             let originalSelector = Selector("prepareForSegue:sender:")
-            let swizzledSelector = Selector("swizzledPrepareForSegue:sender")
+            let swizzledSelector = Selector("swizzledPrepareForSegue:sender:")
             
             let originalMethod = class_getInstanceMethod(self, originalSelector)
             let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
@@ -54,15 +54,16 @@ extension UIViewController {
         self.performSegueWithIdentifier(identifier, sender: sender)
         
         self.dynamicType.swizzlePrepareForSegue(&dispatchOneSwitchBack)
-        
     }
     
     func swizzledPrepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let identifier = segue.identifier else {
-            return
-        }
-        if let handler = self.handlerPool[identifier] {
-            handler?(segue: segue, sender: sender)
+        self.swizzledPrepareForSegue(segue, sender: sender)
+        
+        if let identifier = segue.identifier {
+            if let handler = self.handlerPool[identifier] {
+                handler?(segue: segue, sender: sender)
+            }
         }
     }
+    
 }
