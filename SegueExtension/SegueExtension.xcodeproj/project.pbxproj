@@ -13,6 +13,7 @@
 		BCD23E2E1D13F58300F4E25E /* SegueExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E2D1D13F58300F4E25E /* SegueExtensionTests.swift */; };
 		BCD23E391D13F5E000F4E25E /* SegueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E381D13F5E000F4E25E /* SegueExtension.swift */; };
 		BCD23E4E1D1414F300F4E25E /* TestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E4D1D1414F300F4E25E /* TestedViewController.swift */; };
+		BCD23E5E1D1AC2C200F4E25E /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E5D1D1AC2C200F4E25E /* SampleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		BCD23E2F1D13F58300F4E25E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCD23E381D13F5E000F4E25E /* SegueExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueExtension.swift; sourceTree = "<group>"; };
 		BCD23E4D1D1414F300F4E25E /* TestedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedViewController.swift; sourceTree = "<group>"; };
+		BCD23E5D1D1AC2C200F4E25E /* SampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,12 +89,21 @@
 		BCD23E2C1D13F58300F4E25E /* SegueExtensionTests */ = {
 			isa = PBXGroup;
 			children = (
+				BCD23E8D1D1D178200F4E25E /* Controllers */,
 				BCD23E2D1D13F58300F4E25E /* SegueExtensionTests.swift */,
-				BCD23E4D1D1414F300F4E25E /* TestedViewController.swift */,
 				94F23BAF1D1591440073A228 /* MainStoryboard.storyboard */,
 				BCD23E2F1D13F58300F4E25E /* Info.plist */,
 			);
 			path = SegueExtensionTests;
+			sourceTree = "<group>";
+		};
+		BCD23E8D1D1D178200F4E25E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BCD23E5D1D1AC2C200F4E25E /* SampleViewController.swift */,
+				BCD23E4D1D1414F300F4E25E /* TestedViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +225,7 @@
 			files = (
 				BCD23E2E1D13F58300F4E25E /* SegueExtensionTests.swift in Sources */,
 				BCD23E4E1D1414F300F4E25E /* TestedViewController.swift in Sources */,
+				BCD23E5E1D1AC2C200F4E25E /* SampleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,16 +371,19 @@
 		BCD23E361D13F58300F4E25E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SegueExtensionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Tutu.SegueExtensionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		BCD23E371D13F58300F4E25E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SegueExtensionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Tutu.SegueExtensionTests;

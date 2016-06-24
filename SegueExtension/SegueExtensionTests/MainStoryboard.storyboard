@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pAn-8s-G7W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pAn-8s-G7W">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Tested View Controller-->
@@ -18,18 +18,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="rm1-X3-MV0" kind="presentation" identifier="FirstSegueID1" id="WyV-aa-T4K"/>
-                        <segue destination="rm1-X3-MV0" kind="showDetail" identifier="FirstSegueID2" id="D2F-9H-684"/>
+                        <segue destination="rm1-X3-MV0" kind="presentation" identifier="SegueID1" id="WyV-aa-T4K"/>
+                        <segue destination="rm1-X3-MV0" kind="showDetail" identifier="SegueID2" id="D2F-9H-684"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbK-EH-oln" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="316" y="394"/>
         </scene>
-        <!--Second View Controller-->
+        <!--Tested View Controller-->
         <scene sceneID="3nr-gQ-Fya">
             <objects>
-                <viewController storyboardIdentifier="SecondViewID" id="rm1-X3-MV0" customClass="SecondViewController" customModule="SegueExtensionTests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondViewID" id="rm1-X3-MV0" customClass="TestedViewController" customModule="SegueExtensionTests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2fX-Zx-nva"/>
                         <viewControllerLayoutGuide type="bottom" id="gCQ-hj-KB1"/>

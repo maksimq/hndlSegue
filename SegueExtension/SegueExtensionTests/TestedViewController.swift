@@ -11,15 +11,19 @@ import UIKit
 import XCTest
 
 protocol UIViewControllerTestDelegate {
+    var isOriginMethodInvoked: Bool {get set}
+    var isHandlerInvoked: Bool {get set}
     var sender: AnyObject? {get set}
-    var result: String? {get set}
 }
 
 class TestedViewController: UIViewController, UIViewControllerTestDelegate {
     
-    var result: String?
-    var prepareForSegueCallCount: Int = 0
     var sender: AnyObject?
+    var isOriginMethodInvoked = false
+    var originMethodInvokeCount: Int = 0
+    
+    var isHandlerInvoked = false
+    var handlerInvokeCount: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,66 +31,52 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
         print("View did Load")
     }
     
-    func testedMethod(sender: AnyObject?) {
-        self.performSegueWithIdentifier("FirstSegueID1", sender: sender)
+    // метод инициирует переход без обработчика
+    func makePureSegue(segueID: String, fromSender sender: String) {
+        // сброс проверяемых аргументов.
+        originMethodInvokeCount = 0
+        isOriginMethodInvoked = false
+        
+        self.performSegueWithIdentifier(segueID, sender: sender)
+        
+        isOriginOnceInvoke()
     }
     
-    func firstTest() {
-        self.performSegueWithIdentifier("FirstSegueID1", sender: "SomeSender1") {segue, sender in
-            if segue.sourceViewController !== self {
-                self.result = "Error"
-                return
-            }
-            self.result = "Handler for first segue"
-            self.sender = sender
+    // метод инициирует переход с передачей дополтительного обработчика
+    func makeSegueWithHandler(segueID: String, fromSender sender: String) {
+        originMethodInvokeCount = 0
+        isOriginMethodInvoked = false
+        handlerInvokeCount = 0
+        isHandlerInvoked = false
+        
+        self.performSegueWithIdentifier(segueID, sender: sender) {segue, sender in
+            self.isHandlerInvoked = true
+            self.handlerInvokeCount += 1
         }
+        
+        isHandlerOnceInvoke()
+        isOriginOnceInvoke()
     }
     
-    func secondTest() {
-        self.performSegueWithIdentifier("FirstSegueID2", sender: "SomeSender2") {segue, sender in
-            if segue.sourceViewController !== self {
-                self.result = "Error"
-                return
-            }
-            self.result = "Handler for second segue"
-        }
-    }
-    
-    func thirdTest() {
-        self.performSegueWithIdentifier("FirstSegueID1", sender: "SomeSenderSecond", withHandler: nil)
-    }
-    
-//    override func
-    
+    // реализация дефолтного обработчкика переходов
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let controller = segue.sourceViewController as? TestedViewController {
-            controller.result = "prepareForSegue"
+            isOriginMethodInvoked = true
             controller.sender = sender
-        }
-    }
-}
-
-class SecondViewController: UIViewController, UIViewControllerTestDelegate {
-    
-    var result: String?
-    var sender: AnyObject?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    func firstTest() {
-        self.performSegueWithIdentifier("SecondSegueID", sender: "SomeSender1") {segue, sender in
-            if segue.sourceViewController !== self {
-                self.result = "Error"
-                return
-            }
-            self.result = "Handler for first segue"
-            self.sender = sender
+            originMethodInvokeCount += 1
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("That")
+    private func isOriginOnceInvoke(){
+        // проверка необходимых условий (вызов метода + колическво вызовов = 1)
+        XCTAssertTrue(isOriginMethodInvoked)
+        XCTAssertEqual(originMethodInvokeCount, 1)
+    }
+    
+    private func isHandlerOnceInvoke(){
+        // проверка необходимых условий (вызов метода + колическво вызовов = 1)
+        XCTAssertTrue(isHandlerInvoked)
+        XCTAssertEqual(handlerInvokeCount, 1)
+        
     }
 }

@@ -33,8 +33,8 @@ extension UIViewController {
     
     private class func swizzlePrepareForSegue(inout dispOnce: dispatch_once_t) {
         dispatch_once(&dispOnce) {
-            let originalSelector = Selector("prepareForSegue:sender:")
-            let swizzledSelector = Selector("swizzledPrepareForSegue:sender:")
+            let originalSelector = #selector(UIViewController.prepareForSegue(_:sender:))
+            let swizzledSelector = #selector(UIViewController.swizzledPrepareForSegue(_:sender:))
             
             let originalMethod = class_getInstanceMethod(self, originalSelector)
             let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
