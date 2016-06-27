@@ -30,15 +30,16 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
     var sender: AnyObject?
     var strongRef: SimpleClass?
     
+//    var testedDelegate: TestedViewControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print("View did Load")
     }
     
-    // метод инициирует переход без обработчика
+    // invoke performSegueWithIdentifier without handler.
     func makePureSegue(segueID: String, fromSender sender: String) {
-        // сброс проверяемых аргументов.
+        // reset all object properties
         resetAll()
         
         self.performSegueWithIdentifier(segueID, sender: sender)
@@ -151,7 +152,10 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
     
     private func isOriginInvoked(count: Int) {
         // проверка необходимых условий (вызов метода + колическво вызовов = count)
-        XCTAssertTrue(isOriginMethodInvoked)
-        XCTAssertEqual(originMethodInvokeCount, count)
+        
     }
 }
+
+//protocol TestedViewControllerDelegate {
+//    func checkOriginInvoked(count: Int)
+//}

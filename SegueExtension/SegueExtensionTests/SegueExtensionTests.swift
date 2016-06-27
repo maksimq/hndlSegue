@@ -9,14 +9,14 @@
 import XCTest
 @testable import SegueExtension
 
-/// План тестирования, что нужно затестить, почему и зачем.
-/// 1) Проверить вызов оригинального метода prepareForSegue для ViewController и то, что он вызывается только один раз.
-/// 2) Проверить вызов обработчика для segue, который должен расширить поведение для данного segueId. При этом должен выполниться вызов оригинального prepareForSegue затем обработчика. Вызовы должны быть разовыми.
-/// 3) Проверить работу для нескольких segueId. Убедится в том, что вызываются соотвествующие обработчики.
-/// 4) Убедится в том, что параметры segue и sender переданы в обработчик правильно.
-/// 5) Для двух viewController'ов проверить: вызов performForSegue одного не затрагивает метод другого контроллера.
-/// 6) Проверить освобождение памяти (Создать строгую и слабую ссылку, ей присвоить nil, соответственно после выхода из блока слабая ссылка должна быть nil)
-/// 7) Для иерархии проверить то, что использование расширения в супер калссе не нарушает работу в классе наследнике.
+/// Some test cases, what nead to check
+/// 1) Check that original method prepareForSegue for ViewController was called and he is called only once.
+/// 2) Check that call method performSegue with handler, invoke handler and origin method only once.
+/// 3) Check performSegueWithId for multiple segues one controller. All handlers and origin prepareForSegue methods must invoked once for performSegue.
+/// 4) Check segue and sender arguments in block, they must store right value.
+/// 5) Check that call performForSegue one controller does not affect the perform segues of other controller.
+/// 6) Check ARS in blocks. All blocks must clean their strong reference.
+/// 7) Check how work this extension for class inheritance. Superclass can't change subclass's.
 
 class SegueExtensionTests: XCTestCase {
     
@@ -40,31 +40,31 @@ class SegueExtensionTests: XCTestCase {
         super.tearDown()
     }
 
-//  Проверить вызов оригинального метода prepareForSegue для ViewController.
+    //  1) Check that original method prepareForSegue for ViewController was called and he is called only once.
     func testIvokedOriginMethod() {
         firstViewController!.makePureSegue("SegueID1", fromSender: "Self")
     }
    
-//  Проверить вызов обработчика для segue, который должен расширить поведение для данного segueId. При этом должен выполниться вызов оригинального prepareForSegue затем обработчика.
+    //  2) Check that call method performSegue with handler, invoke handler and origin method only once.
     func testIvokeWithHandler() {
         let sender = "FirstViewController"
         firstViewController?.makeOnceSegueWithHandler("SegueID1", fromSender: sender)
     }
     
-//  Проверить работу для нескольких segueId. Убедится в том, что вызываются соотвествующие обработчики.
+    //  3) Check performSegueWithId for multiple segues one controller. All handlers and origin prepareForSegue methods must invoked once for performSegue.
     func testSeveralSeguesForOneController() {
         self.measureBlock{
             self.firstViewController?.makeSeveralSeguesWithDiffHandlers("SegueID1", fromSender: "FirstController")
         }
     }
     
-//  Убедится в том, что параметры segue и sender переданы в обработчик правильно.
+    //  4) Check segue and sender arguments in block, they must store right value.
     func testArgumentsInBlock() {
         firstViewController?.makeSegueToValidArguments("SegueID1", withSender: "FirstController")
     }
     
-//  Для двух viewController'ов проверить: вызов performForSegue одного не затрагивает метод другого контроллера.
-//  Для иерархии проверить то, что использование расширения в супер калссе не нарушает работу в классе наследнике.
+    //  5) Check that call performForSegue one controller does not affect the perform segues of other controller.
+    //  7) Check how work this extension for class inheritance. Superclass can't change subclass's.
     func testSubClassMethods() {
         
         firstViewController?.makePureSegue("SegueID", fromSender: "FirstController")
@@ -74,8 +74,15 @@ class SegueExtensionTests: XCTestCase {
         secondViewController?.makeSeveralSeguesWithDiffHandlers("SegueID", fromSender: "SecondController")
     }
     
-//  проверить освобождение памяти (Создать строгую и слабую ссылку, ей присвоить nil, соответственно после выхода из блока слабая ссылка должна быть nil)
+    //  6) Check ARS in blocks. All blocks must clean their strong reference.
     func testMemoryReleased() {
         firstViewController?.makeSegueToCheckRefConter("SegueID1", withSender: "FirstController")
     }
 }
+
+//extension SegueExtensionTests: TestedViewControllerDelegate {
+//    func checkOriginInvoked(count: Int, forController controller: TestedViewController) {
+//        XCTAssertTrue(controller.isOriginMethodInvoked)
+//        XCTAssertEqual(controller.originMethodInvokeCount, count)
+//    }
+//}

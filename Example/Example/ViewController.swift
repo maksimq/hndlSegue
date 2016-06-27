@@ -25,16 +25,16 @@ class FirstViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.performSegueWithIdentifierSE("TestSegueID", sender: "SomeSender"){_, _ in
+        self.performSegueWithIdentifier("TestSegueID", sender: "SomeSender"){_, _ in
             print("It's work")
             self.result = "It's work"
         }
         print(self.result)
-        self.performSegueWithIdentifierSE("TestSegueID", sender: "SomeSender"){_, _ in
+        self.performSegueWithIdentifier("TestSegueID", sender: "SomeSender"){_, _ in
             print("It's work second time")
         }
         print(self.result)
-        self.performSegueWithIdentifierSE("TestSegueID", sender: "SomeSender", withSegueHandler: nil)
+        self.performSegueWithIdentifier("TestSegueID", sender: "SomeSender")
     }
     
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -10,7 +10,7 @@ import Foundation
 
 public typealias SegueHandler = (@convention(block) (segue: UIStoryboardSegue, sender:AnyObject?) -> Void)?
 
-var AssociatedObjectHandle: UInt8 = 0
+var AssociatedObjectHandle: UInt8 = 79
 
 extension UIViewController {
     
@@ -31,29 +31,24 @@ extension UIViewController {
         }
     }
     
-    private class func swizzlePrepareForSegue(inout dispOnce: dispatch_once_t) {
-        dispatch_once(&dispOnce) {
-            let originalSelector = #selector(UIViewController.prepareForSegue(_:sender:))
-            let swizzledSelector = #selector(UIViewController.swizzledPrepareForSegue(_:sender:))
+    private class func swizzlePrepareForSegue() {
+        let originalSelector = #selector(UIViewController.prepareForSegue(_:sender:))
+        let swizzledSelector = #selector(UIViewController.swizzledPrepareForSegue(_:sender:))
             
-            let originalMethod = class_getInstanceMethod(self, originalSelector)
-            let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
-            
-            method_exchangeImplementations(originalMethod, swizzledMethod)
-        }
+        let originalMethod = class_getInstanceMethod(self, originalSelector)
+        let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
+        
+        method_exchangeImplementations(originalMethod, swizzledMethod)
     }
     
     public final func performSegueWithIdentifier(identifier: String, sender: AnyObject?, withHandler handler: SegueHandler) {
         
-        var dispatchOneSwitch: dispatch_once_t = 0
-        var dispatchOneSwitchBack: dispatch_once_t = 0
-        
-        self.dynamicType.swizzlePrepareForSegue(&dispatchOneSwitch)
-        
-        handlerPool[identifier] = handler
+        objc_sync_enter(self)
+        self.dynamicType.swizzlePrepareForSegue()
+        self.handlerPool[identifier] = handler
         self.performSegueWithIdentifier(identifier, sender: sender)
-        
-        self.dynamicType.swizzlePrepareForSegue(&dispatchOneSwitchBack)
+        self.dynamicType.swizzlePrepareForSegue()
+        objc_sync_exit(self)
     }
     
     func swizzledPrepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -65,5 +60,4 @@ extension UIViewController {
             }
         }
     }
-    
 }
