@@ -19,17 +19,17 @@
                     </view>
                     <connections>
                         <segue destination="rm1-X3-MV0" kind="presentation" identifier="SegueID1" id="WyV-aa-T4K"/>
-                        <segue destination="rm1-X3-MV0" kind="showDetail" identifier="SegueID2" id="D2F-9H-684"/>
+                        <segue destination="rm1-X3-MV0" kind="showDetail" identifier="SegueID" id="D2F-9H-684"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbK-EH-oln" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="316" y="394"/>
         </scene>
-        <!--Tested View Controller-->
+        <!--Tested Sub View Controller-->
         <scene sceneID="3nr-gQ-Fya">
             <objects>
-                <viewController storyboardIdentifier="SecondViewID" id="rm1-X3-MV0" customClass="TestedViewController" customModule="SegueExtensionTests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondViewID" id="rm1-X3-MV0" customClass="TestedSubViewController" customModule="SegueExtensionTests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2fX-Zx-nva"/>
                         <viewControllerLayoutGuide type="bottom" id="gCQ-hj-KB1"/>
@@ -40,17 +40,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="2gs-7V-i4P" kind="presentation" identifier="SecondSegueID" id="WLX-ve-V5B"/>
+                        <segue destination="2gs-7V-i4P" kind="presentation" identifier="SegueID" id="WLX-ve-V5B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Her-UD-xBS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1169" y="304"/>
         </scene>
-        <!--View Controller-->
+        <!--Tested Sub View Controller-->
         <scene sceneID="4Py-rD-U5E">
             <objects>
-                <viewController id="2gs-7V-i4P" sceneMemberID="viewController">
+                <viewController id="2gs-7V-i4P" customClass="TestedSubViewController" customModule="SegueExtensionTests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NVE-YD-Ag9"/>
                         <viewControllerLayoutGuide type="bottom" id="vBP-U7-LIN"/>
@@ -67,6 +67,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="WyV-aa-T4K"/>
+        <segue reference="D2F-9H-684"/>
     </inferredMetricsTieBreakers>
 </document>

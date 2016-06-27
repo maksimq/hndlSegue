@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		94F23BB41D1594530073A228 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94F23BAF1D1591440073A228 /* MainStoryboard.storyboard */; };
+		BCCD747D1D212B150061763C /* TestedSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCD747C1D212B150061763C /* TestedSubViewController.swift */; };
+		BCCD747F1D21447F0061763C /* SimpleClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCD747E1D21447F0061763C /* SimpleClass.swift */; };
 		BCD23E221D13F58300F4E25E /* SegueExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD23E211D13F58300F4E25E /* SegueExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCD23E291D13F58300F4E25E /* SegueExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD23E1E1D13F58300F4E25E /* SegueExtension.framework */; };
 		BCD23E2E1D13F58300F4E25E /* SegueExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E2D1D13F58300F4E25E /* SegueExtensionTests.swift */; };
@@ -28,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		94F23BAF1D1591440073A228 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		BCCD747C1D212B150061763C /* TestedSubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedSubViewController.swift; sourceTree = "<group>"; };
+		BCCD747E1D21447F0061763C /* SimpleClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleClass.swift; sourceTree = "<group>"; };
 		BCD23E1E1D13F58300F4E25E /* SegueExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SegueExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD23E211D13F58300F4E25E /* SegueExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SegueExtension.h; sourceTree = "<group>"; };
 		BCD23E231D13F58300F4E25E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 			children = (
 				BCD23E5D1D1AC2C200F4E25E /* SampleViewController.swift */,
 				BCD23E4D1D1414F300F4E25E /* TestedViewController.swift */,
+				BCCD747C1D212B150061763C /* TestedSubViewController.swift */,
+				BCCD747E1D21447F0061763C /* SimpleClass.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -224,8 +230,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCD23E2E1D13F58300F4E25E /* SegueExtensionTests.swift in Sources */,
+				BCCD747D1D212B150061763C /* TestedSubViewController.swift in Sources */,
 				BCD23E4E1D1414F300F4E25E /* TestedViewController.swift in Sources */,
 				BCD23E5E1D1AC2C200F4E25E /* SampleViewController.swift in Sources */,
+				BCCD747F1D21447F0061763C /* SimpleClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
