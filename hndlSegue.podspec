@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "hndlSegue"
-  s.version      = "0.1"
+  s.version      = "0.2"
   s.summary      = "hndlSegue make work with segues easy"
 
   s.description  = <<-DESC
