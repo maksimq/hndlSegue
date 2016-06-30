@@ -9,7 +9,7 @@
 import XCTest
 @testable import SegueExtension
 
-/// Some test cases, what nead to check
+/// Some test cases, what need to check
 /// 1) Check that original method prepareForSegue for ViewController was called and he is called only once.
 /// 2) Check that call method performSegue with handler, invoke handler and origin method only once.
 /// 3) Check performSegueWithId for multiple segues one controller. All handlers and origin prepareForSegue methods must invoked once for performSegue.
