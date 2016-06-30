@@ -32,7 +32,10 @@ class SegueExtensionTests: XCTestCase {
         self.storyboard = UIStoryboard.init(name: "MainStoryboard", bundle: NSBundle(forClass: self.dynamicType))
         
         firstViewController = storyboard?.instantiateViewControllerWithIdentifier("testViewID") as? TestedViewController
+        firstViewController?.testDelegate = self
+        
         secondViewController = storyboard?.instantiateViewControllerWithIdentifier("SecondViewID") as? TestedSubViewController
+        secondViewController?.testDelegate = self
     }
     
     override func tearDown() {
@@ -48,7 +51,7 @@ class SegueExtensionTests: XCTestCase {
     //  2) Check that call method performSegue with handler, invoke handler and origin method only once.
     func testIvokeWithHandler() {
         let sender = "FirstViewController"
-        firstViewController?.makeOnceSegueWithHandler("SegueID1", fromSender: sender)
+        firstViewController?.makeSegueWithHandler("SegueID1", fromSender: sender)
     }
     
     //  3) Check performSegueWithId for multiple segues one controller. All handlers and origin prepareForSegue methods must invoked once for performSegue.
@@ -80,9 +83,27 @@ class SegueExtensionTests: XCTestCase {
     }
 }
 
-//extension SegueExtensionTests: TestedViewControllerDelegate {
-//    func checkOriginInvoked(count: Int, forController controller: TestedViewController) {
-//        XCTAssertTrue(controller.isOriginMethodInvoked)
-//        XCTAssertEqual(controller.originMethodInvokeCount, count)
-//    }
-//}
+extension SegueExtensionTests: TestedViewControllerDelegate {
+    func checkOriginMethodInvoked(count: Int, forController controller: TestedViewController) {
+        XCTAssertTrue(controller.isOriginMethodInvoked)
+        XCTAssertEqual(controller.originMethodInvokeCount, count)
+    }
+    
+    func checkHandlerBlockInvoked(count: Int, forController controller: TestedViewController){
+        XCTAssertTrue(controller.isHandlerInvoked)
+        XCTAssertEqual(controller.handlerInvokeCount, count)
+    }
+    
+    func checkHandlerBlockInvokedOnceForSender(sender: AnyObject?, forController controller: TestedViewController){
+        checkHandlerBlockInvoked(1, forController: controller)
+        XCTAssertEqual(controller.sender as? String, sender as? String)
+    }
+    
+    func checkArguments(segue: UIStoryboardSegue, andSender sender: AnyObject?, forContoroller controller: TestedViewController) {
+        XCTAssertEqual(controller, segue.sourceViewController)
+        XCTAssertEqual(sender as? String, controller.sender as? String)
+    }
+    func checkWeakReference(controller: TestedViewController) {
+        XCTAssertNil(controller.weakRef)
+    }
+}

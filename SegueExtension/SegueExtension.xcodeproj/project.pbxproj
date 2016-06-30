@@ -15,7 +15,6 @@
 		BCD23E2E1D13F58300F4E25E /* SegueExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E2D1D13F58300F4E25E /* SegueExtensionTests.swift */; };
 		BCD23E391D13F5E000F4E25E /* SegueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E381D13F5E000F4E25E /* SegueExtension.swift */; };
 		BCD23E4E1D1414F300F4E25E /* TestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E4D1D1414F300F4E25E /* TestedViewController.swift */; };
-		BCD23E5E1D1AC2C200F4E25E /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E5D1D1AC2C200F4E25E /* SampleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +39,6 @@
 		BCD23E2F1D13F58300F4E25E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCD23E381D13F5E000F4E25E /* SegueExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueExtension.swift; sourceTree = "<group>"; };
 		BCD23E4D1D1414F300F4E25E /* TestedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedViewController.swift; sourceTree = "<group>"; };
-		BCD23E5D1D1AC2C200F4E25E /* SampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +102,6 @@
 		BCD23E8D1D1D178200F4E25E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BCD23E5D1D1AC2C200F4E25E /* SampleViewController.swift */,
 				BCD23E4D1D1414F300F4E25E /* TestedViewController.swift */,
 				BCCD747C1D212B150061763C /* TestedSubViewController.swift */,
 				BCCD747E1D21447F0061763C /* SimpleClass.swift */,
@@ -232,7 +229,6 @@
 				BCD23E2E1D13F58300F4E25E /* SegueExtensionTests.swift in Sources */,
 				BCCD747D1D212B150061763C /* TestedSubViewController.swift in Sources */,
 				BCD23E4E1D1414F300F4E25E /* TestedViewController.swift in Sources */,
-				BCD23E5E1D1AC2C200F4E25E /* SampleViewController.swift in Sources */,
 				BCCD747F1D21447F0061763C /* SimpleClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
