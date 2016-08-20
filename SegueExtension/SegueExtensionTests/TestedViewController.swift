@@ -34,8 +34,6 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
     var testDelegate: TestedViewControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("View did Load")
     }
     
     // invoke performSegueWithIdentifier without handler.
