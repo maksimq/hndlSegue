@@ -28,13 +28,13 @@ class SegueExtensionTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.storyboard = UIStoryboard.init(name: "MainStoryboard", bundle: NSBundle(forClass: self.dynamicType))
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.storyboard = UIStoryboard.init(name: "MainStoryboard", bundle: Bundle(for: type(of: self)))
         
-        firstViewController = storyboard?.instantiateViewControllerWithIdentifier("testViewID") as? TestedViewController
+        firstViewController = storyboard?.instantiateViewController(withIdentifier: "testViewID") as? TestedViewController
         firstViewController?.testDelegate = self
         
-        secondViewController = storyboard?.instantiateViewControllerWithIdentifier("SecondViewID") as? TestedSubViewController
+        secondViewController = storyboard?.instantiateViewController(withIdentifier: "SecondViewID") as? TestedSubViewController
         secondViewController?.testDelegate = self
     }
     
@@ -56,14 +56,14 @@ class SegueExtensionTests: XCTestCase {
     
     //  3) Check performSegueWithId for multiple segues one controller. All handlers and origin prepareForSegue methods must invoked once for performSegue.
     func testSeveralSeguesForOneController() {
-        self.measureBlock{
+        self.measure{
             self.firstViewController?.makeSeveralSeguesWithDiffHandlers("SegueID1", fromSender: "FirstController")
         }
     }
     
     //  4) Check segue and sender arguments in block, they must store right value.
     func testArgumentsInBlock() {
-        firstViewController?.makeSegueToValidArguments("SegueID1", withSender: "FirstController")
+        firstViewController?.makeSegueToValidArguments("SegueID1", withSender: "FirstController" as AnyObject)
     }
     
     //  5) Check that call performForSegue one controller does not affect the perform segues of other controller.
@@ -79,31 +79,31 @@ class SegueExtensionTests: XCTestCase {
     
     //  6) Check ARS in blocks. All blocks must clean their strong reference.
     func testMemoryReleased() {
-        firstViewController?.makeSegueToCheckRefConter("SegueID1", withSender: "FirstController")
+        firstViewController?.makeSegueToCheckRefConter("SegueID1", withSender: "FirstController" as AnyObject)
     }
 }
 
 extension SegueExtensionTests: TestedViewControllerDelegate {
-    func checkOriginMethodInvoked(count: Int, forController controller: TestedViewController) {
+    func checkOriginMethodInvoked(_ count: Int, forController controller: TestedViewController) {
         XCTAssertTrue(controller.isOriginMethodInvoked)
         XCTAssertEqual(controller.originMethodInvokeCount, count)
     }
     
-    func checkHandlerBlockInvoked(count: Int, forController controller: TestedViewController){
+    func checkHandlerBlockInvoked(_ count: Int, forController controller: TestedViewController){
         XCTAssertTrue(controller.isHandlerInvoked)
         XCTAssertEqual(controller.handlerInvokeCount, count)
     }
     
-    func checkHandlerBlockInvokedOnceForSender(sender: AnyObject?, forController controller: TestedViewController){
+    func checkHandlerBlockInvokedOnceForSender(_ sender: AnyObject?, forController controller: TestedViewController){
         checkHandlerBlockInvoked(1, forController: controller)
         XCTAssertEqual(controller.sender as? String, sender as? String)
     }
     
-    func checkArguments(segue: UIStoryboardSegue, andSender sender: AnyObject?, forContoroller controller: TestedViewController) {
-        XCTAssertEqual(controller, segue.sourceViewController)
+    func checkArguments(_ segue: UIStoryboardSegue, andSender sender: AnyObject?, forContoroller controller: TestedViewController) {
+        XCTAssertEqual(controller, segue.source)
         XCTAssertEqual(sender as? String, controller.sender as? String)
     }
-    func checkWeakReference(controller: TestedViewController) {
+    func checkWeakReference(_ controller: TestedViewController) {
         XCTAssertNil(controller.weakRef)
     }
 }

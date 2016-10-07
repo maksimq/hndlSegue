@@ -16,44 +16,44 @@ class TestedSubViewController: TestedViewController {
     var isOverrideMethodInvoked: Bool = false
 
     // make performSegue without hamdler block
-    override func makePureSegue(segueID: String, fromSender sender: String) {
+    override func makePureSegue(_ segueID: String, fromSender sender: String) {
         isOriginMethodInvoked = true
         isOverrideMethodInvoked = false
-        self.performSegueWithIdentifier(segueID, sender: sender)
+        self.performSegue(withIdentifier: segueID, sender: sender)
         
         testDelegate!.checkOverrideMethodIncoked(1, forController: self)
     }
     
     // make performSegue without block and two times with handler block
-    override func makeSeveralSeguesWithDiffHandlers(segueID: String, fromSender sender: String) {
+    override func makeSeveralSeguesWithDiffHandlers(_ segueID: String, fromSender sender: String) {
         isOriginMethodInvoked = true
         isOverrideMethodInvoked = false
         originMethodInvokeCount = 0
         
-        self.performSegueWithIdentifier(segueID, sender: sender)
+        self.performSegue(withIdentifier: segueID, sender: sender)
         testDelegate?.checkOverrideMethodIncoked(1, forController: self)
         
-        self.performSegueWithIdentifier(segueID, sender: sender) { segue, sender in
+        self.performSegueWithIdentifier(segueID, sender: sender as AnyObject?) { segue, sender in
             self.isHandlerInvoked = true
             self.handlerInvokeCount += 1
             self.sender = "FirstHandler" as AnyObject
         }
-        testDelegate?.checkHandlerBlockInvokedOnceForSender("FirstHandler", forController: self)
+        testDelegate?.checkHandlerBlockInvokedOnceForSender("FirstHandler" as AnyObject?, forController: self)
        
         handlerInvokeCount = 0
         isHandlerInvoked = false
         
-        self.performSegueWithIdentifier(segueID, sender: sender) { segue, sender in
+        self.performSegueWithIdentifier(segueID, sender: sender as AnyObject?) { segue, sender in
             self.isHandlerInvoked = true
             self.handlerInvokeCount += 1
             self.sender = "SecondSender" as AnyObject
         }
         
-        testDelegate?.checkHandlerBlockInvokedOnceForSender("SecondSender", forController: self)
+        testDelegate?.checkHandlerBlockInvokedOnceForSender("SecondSender" as AnyObject?, forController: self)
         testDelegate?.checkOverrideMethodIncoked(3, forController: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         isOriginMethodInvoked = false
         isOverrideMethodInvoked = true
         originMethodInvokeCount += 1
@@ -61,7 +61,7 @@ class TestedSubViewController: TestedViewController {
 }
 
 extension TestedViewControllerDelegate {
-    func checkOverrideMethodIncoked(count: Int, forController controller: TestedSubViewController) {
+    func checkOverrideMethodIncoked(_ count: Int, forController controller: TestedSubViewController) {
         XCTAssertTrue(controller.isOverrideMethodInvoked)
         XCTAssertFalse(controller.isOriginMethodInvoked)
         XCTAssertEqual(controller.originMethodInvokeCount, count)

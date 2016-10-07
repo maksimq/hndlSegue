@@ -24,25 +24,20 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
-        self.performSegueWithIdentifier("TestSegueID", sender: "SomeSender"){_, _ in
+    override func viewWillAppear(_ animated: Bool) {
+        self.performSegueWithIdentifier("TestSegueID", sender: "SomeSender" as AnyObject?){_, _ in
             print("It's work")
             self.result = "It's work"
         }
         print(self.result)
-        self.performSegueWithIdentifier("TestSegueID", sender: "SomeSender"){_, _ in
+        self.performSegueWithIdentifier("TestSegueID", sender: "SomeSender" as AnyObject?){_, _ in
             print("It's work second time")
         }
         print(self.result)
-        self.performSegueWithIdentifier("TestSegueID", sender: "SomeSender")
+        self.performSegue(withIdentifier: "TestSegueID", sender: "SomeSender")
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//      //  super.prepareForSegue(segue, sender: sender)
-//        print("Prepare For segue")
-//    }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         print(self.result)
     }
 }
-
