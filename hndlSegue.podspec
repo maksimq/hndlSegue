@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  #@@CURRENT_VERSION = "CURRENT_POD_VERSION"
+  #@@CURRENT_VERSION = "1.0"
 
   s.name         = "hndlSegue"
-  s.version      = "CURRENT_POD_VERSION"
+  s.version      = "1.0"
   s.summary      = "hndlSegue make work with segues easy"
 
   s.description  = <<-DESC
@@ -25,10 +25,10 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "8.0"
 
-  s.source           = { :git => 'https://github.com/madmaxmv/hndlSegue.git', :tag => "vCURRENT_POD_VERSION" }
+  s.source           = { :git => 'https://github.com/madmaxmv/hndlSegue.git', :tag => "v1.0" }
 
-  s.source_files  = "SegueExtension/SegueExtension/*.swift"
-  s.exclude_files = "SegueExtension/Exclude"
+  s.source_files  = "SegueExtension/*.swift"
+  s.exclude_files = "Exclude"
 
   #s.resources = "Resources/*.*"
 
