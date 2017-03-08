@@ -28,8 +28,9 @@ class SegueExtensionTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.storyboard = UIStoryboard.init(name: "MainStoryboard", bundle: Bundle(for: type(of: self)))
+        window = UIWindow(frame: UIScreen.main.bounds)
+        storyboard = UIStoryboard.init(name: "MainStoryboard", bundle: Bundle(for: type(of: self)))
+        window?.rootViewController = storyboard?.instantiateInitialViewController()
         
         firstViewController = storyboard?.instantiateViewController(withIdentifier: "testViewID") as? TestedViewController
         firstViewController?.testDelegate = self
@@ -63,7 +64,7 @@ class SegueExtensionTests: XCTestCase {
     
     //  4) Check segue and sender arguments in block, they must store right value.
     func testArgumentsInBlock() {
-        firstViewController?.makeSegueToValidArguments("SegueID1", withSender: "FirstController" as AnyObject)
+        firstViewController?.makeSegueToValidArguments("SegueID1", withSender: "FirstController")
     }
     
     //  5) Check that call performForSegue one controller does not affect the perform segues of other controller.
@@ -79,7 +80,7 @@ class SegueExtensionTests: XCTestCase {
     
     //  6) Check ARS in blocks. All blocks must clean their strong reference.
     func testMemoryReleased() {
-        firstViewController?.makeSegueToCheckRefConter("SegueID1", withSender: "FirstController" as AnyObject)
+        firstViewController?.makeSegueToCheckRefConter("SegueID1", withSender: "FirstController")
     }
 }
 
@@ -94,12 +95,12 @@ extension SegueExtensionTests: TestedViewControllerDelegate {
         XCTAssertEqual(controller.handlerInvokeCount, count)
     }
     
-    func checkHandlerBlockInvokedOnceForSender(_ sender: AnyObject?, forController controller: TestedViewController){
+    func checkHandlerBlockInvokedOnceForSender(_ sender: Any?, forController controller: TestedViewController){
         checkHandlerBlockInvoked(1, forController: controller)
         XCTAssertEqual(controller.sender as? String, sender as? String)
     }
     
-    func checkArguments(_ segue: UIStoryboardSegue, andSender sender: AnyObject?, forContoroller controller: TestedViewController) {
+    func checkArguments(_ segue: UIStoryboardSegue, andSender sender: Any?, forContoroller controller: TestedViewController) {
         XCTAssertEqual(controller, segue.source)
         XCTAssertEqual(sender as? String, controller.sender as? String)
     }

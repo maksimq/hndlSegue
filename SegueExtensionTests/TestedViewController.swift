@@ -14,7 +14,7 @@ import XCTest
 protocol UIViewControllerTestDelegate {
     var isOriginMethodInvoked: Bool {get set}
     var isHandlerInvoked: Bool {get set}
-    var sender: AnyObject? {get set}
+    var sender: Any? {get set}
 }
 
 class TestedViewController: UIViewController, UIViewControllerTestDelegate {
@@ -27,7 +27,7 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
     var isHandlerInvoked = false
     var handlerInvokeCount: Int = 0
     
-    var sender: AnyObject?
+    var sender: Any?
     var strongRef: SimpleClass?
     weak var weakRef: SimpleClass?
     
@@ -41,7 +41,7 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
         // reset all object properties
         resetAll()
         
-        self.performSegue(withIdentifier: segueID, sender: sender)
+        performSegue(withIdentifier: segueID, sender: sender)
         testDelegate?.checkOriginMethodInvoked(ONCE, forController: self)
     }
     
@@ -49,7 +49,7 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
     func makeSegueWithHandler(_ segueID: String, fromSender sender: String) {
         resetAll()
         
-        self.performSegueWithIdentifier(segueID, sender: sender as AnyObject?) {segue, sender in
+        performSegue(withIdentifier: segueID, sender: sender) { [unowned self] segue, sender in
             self.isHandlerInvoked = true
             self.handlerInvokeCount += 1
         }
@@ -61,32 +61,32 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
     func makeSeveralSeguesWithDiffHandlers(_ segueID: String, fromSender sender: String) {
         resetAll()
         
-        self.performSegue(withIdentifier: segueID, sender: sender)
+        performSegue(withIdentifier: segueID, sender: sender)
         
-        self.performSegueWithIdentifier(segueID, sender: sender as AnyObject?) { segue, sender in
+        performSegue(withIdentifier: segueID, sender: sender) { [unowned self] segue, sender in
             self.isHandlerInvoked = true
             self.handlerInvokeCount += 1
-            self.sender = "FirstHandler" as AnyObject
+            self.sender = "FirstHandler"
         }
-        testDelegate?.checkHandlerBlockInvokedOnceForSender("FirstHandler" as AnyObject?, forController: self)
+        testDelegate?.checkHandlerBlockInvokedOnceForSender("FirstHandler", forController: self)
         handlerInvokeCount = 0
         isHandlerInvoked = false
         
-        self.performSegueWithIdentifier(segueID, sender: sender as AnyObject?) { segue, sender in
+        performSegue(withIdentifier: segueID, sender: sender) { [unowned self] segue, sender in
             self.isHandlerInvoked = true
             self.handlerInvokeCount += 1
-            self.sender = "SecondSender" as AnyObject
+            self.sender = "SecondSender"
         }
-        testDelegate?.checkHandlerBlockInvokedOnceForSender("SecondSender" as AnyObject?, forController: self)
+        testDelegate?.checkHandlerBlockInvokedOnceForSender("SecondSender" , forController: self)
         testDelegate?.checkOriginMethodInvoked(3, forController: self)
     }
     
     // perform segue to check argumens in block
-    func makeSegueToValidArguments(_ segueID: String, withSender sender: AnyObject) {
+    func makeSegueToValidArguments(_ segueID: String, withSender sender: Any) {
         resetAll()
         self.sender = sender
         
-        self.performSegueWithIdentifier(segueID, sender: sender){ segue, sender in
+        performSegue(withIdentifier: segueID, sender: sender) { [unowned self] segue, sender in
             self.isHandlerInvoked = true
             self.handlerInvokeCount += 1
             
@@ -95,12 +95,12 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
     }
     
     // perform segue to check ARC (after block exec, all strong ref clean)
-    func makeSegueToCheckRefConter(_ segueID: String, withSender sender: AnyObject) {
+    func makeSegueToCheckRefConter(_ segueID: String, withSender sender: Any) {
         resetAll()
         strongRef = SimpleClass()
         weakRef = strongRef
         
-        self.performSegueWithIdentifier(segueID, sender: sender){ segue, sender in
+        performSegue(withIdentifier: segueID, sender: sender) { [unowned self] segue, sender in
             let someProp = self.strongRef
             XCTAssertNotNil(someProp)
         }
@@ -112,9 +112,9 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         isOriginMethodInvoked = true
         originMethodInvokeCount += 1
-        self.sender = sender as AnyObject?
+        self.sender = sender
         
-        testDelegate?.checkArguments(segue, andSender: sender as AnyObject?, forContoroller: self)
+        testDelegate?.checkArguments(segue, andSender: sender, forContoroller: self)
     }
     
     fileprivate func resetAll(){
@@ -128,7 +128,7 @@ class TestedViewController: UIViewController, UIViewControllerTestDelegate {
 protocol TestedViewControllerDelegate {
     func checkOriginMethodInvoked(_ count: Int, forController controller: TestedViewController)
     func checkHandlerBlockInvoked(_ count: Int, forController controller: TestedViewController)
-    func checkHandlerBlockInvokedOnceForSender(_ sender: AnyObject?, forController controller: TestedViewController)
-    func checkArguments(_ segue: UIStoryboardSegue, andSender sender: AnyObject?, forContoroller controller: TestedViewController)
+    func checkHandlerBlockInvokedOnceForSender(_ sender: Any?, forController controller: TestedViewController)
+    func checkArguments(_ segue: UIStoryboardSegue, andSender sender: Any?, forContoroller controller: TestedViewController)
     func checkWeakReference(_ controller: TestedViewController)
 }

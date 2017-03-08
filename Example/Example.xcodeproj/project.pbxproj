@@ -8,18 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		BCD23DBA1D13F2E900F4E25E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23DB91D13F2E900F4E25E /* AppDelegate.swift */; };
-		BCD23DBC1D13F2E900F4E25E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23DBB1D13F2E900F4E25E /* ViewController.swift */; };
+		BCD23DBC1D13F2E900F4E25E /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23DBB1D13F2E900F4E25E /* FirstViewController.swift */; };
 		BCD23DBF1D13F2E900F4E25E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCD23DBD1D13F2E900F4E25E /* Main.storyboard */; };
 		BCD23DC11D13F2E900F4E25E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCD23DC01D13F2E900F4E25E /* Assets.xcassets */; };
 		BCD23DC41D13F2E900F4E25E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCD23DC21D13F2E900F4E25E /* LaunchScreen.storyboard */; };
 		BCD23DCF1D13F2E900F4E25E /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23DCE1D13F2E900F4E25E /* ExampleTests.swift */; };
 		BCD23DDA1D13F2E900F4E25E /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23DD91D13F2E900F4E25E /* ExampleUITests.swift */; };
-		BCD23E471D13FC5A00F4E25E /* SegueExtension.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = BCD23E401D13FB8900F4E25E /* SegueExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BCD23E4A1D13FD6600F4E25E /* SegueExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD23E401D13FB8900F4E25E /* SegueExtension.framework */; };
 		BCD23E521D14348300F4E25E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD23E511D14348300F4E25E /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		943AA88D1DE0455100E0C146 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 943AA8881DE0455000E0C146 /* SegueExtension.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCD23E1E1D13F58300F4E25E;
+			remoteInfo = SegueExtension;
+		};
+		943AA88F1DE0455100E0C146 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 943AA8881DE0455000E0C146 /* SegueExtension.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCD23E281D13F58300F4E25E;
+			remoteInfo = SegueExtensionTests;
+		};
 		BCD23DCB1D13F2E900F4E25E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BCD23DAE1D13F2E900F4E25E /* Project object */;
@@ -34,27 +46,6 @@
 			remoteGlobalIDString = BCD23DB51D13F2E900F4E25E;
 			remoteInfo = Example;
 		};
-		BCD23E3F1D13FB8900F4E25E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BCD23E3A1D13FB8900F4E25E /* SegueExtension.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BCD23E1E1D13F58300F4E25E;
-			remoteInfo = SegueExtension;
-		};
-		BCD23E411D13FB8900F4E25E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BCD23E3A1D13FB8900F4E25E /* SegueExtension.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BCD23E281D13F58300F4E25E;
-			remoteInfo = SegueExtensionTests;
-		};
-		BCD23E481D13FD3800F4E25E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BCD23E3A1D13FB8900F4E25E /* SegueExtension.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BCD23E1D1D13F58300F4E25E;
-			remoteInfo = SegueExtension;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,7 +55,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BCD23E471D13FC5A00F4E25E /* SegueExtension.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,9 +62,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		943AA8881DE0455000E0C146 /* SegueExtension.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SegueExtension.xcodeproj; path = ../SegueExtension.xcodeproj; sourceTree = "<group>"; };
 		BCD23DB61D13F2E900F4E25E /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD23DB91D13F2E900F4E25E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BCD23DBB1D13F2E900F4E25E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BCD23DBB1D13F2E900F4E25E /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		BCD23DBE1D13F2E900F4E25E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BCD23DC01D13F2E900F4E25E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCD23DC31D13F2E900F4E25E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -85,7 +76,6 @@
 		BCD23DD51D13F2E900F4E25E /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD23DD91D13F2E900F4E25E /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		BCD23DDB1D13F2E900F4E25E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BCD23E3A1D13FB8900F4E25E /* SegueExtension.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SegueExtension.xcodeproj; path = ../SegueExtension/SegueExtension.xcodeproj; sourceTree = "<group>"; };
 		BCD23E511D14348300F4E25E /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,7 +84,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCD23E4A1D13FD6600F4E25E /* SegueExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,10 +104,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		943AA8891DE0455000E0C146 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				943AA88E1DE0455100E0C146 /* SegueExtension.framework */,
+				943AA8901DE0455100E0C146 /* SegueExtensionTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BCD23DAD1D13F2E900F4E25E = {
 			isa = PBXGroup;
 			children = (
-				BCD23E3A1D13FB8900F4E25E /* SegueExtension.xcodeproj */,
+				943AA8881DE0455000E0C146 /* SegueExtension.xcodeproj */,
 				BCD23DB81D13F2E900F4E25E /* Example */,
 				BCD23DCD1D13F2E900F4E25E /* ExampleTests */,
 				BCD23DD81D13F2E900F4E25E /* ExampleUITests */,
@@ -140,7 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				BCD23DB91D13F2E900F4E25E /* AppDelegate.swift */,
-				BCD23DBB1D13F2E900F4E25E /* ViewController.swift */,
+				BCD23DBB1D13F2E900F4E25E /* FirstViewController.swift */,
 				BCD23E511D14348300F4E25E /* SecondViewController.swift */,
 				BCD23DBD1D13F2E900F4E25E /* Main.storyboard */,
 				BCD23DC01D13F2E900F4E25E /* Assets.xcassets */,
@@ -168,15 +166,6 @@
 			path = ExampleUITests;
 			sourceTree = "<group>";
 		};
-		BCD23E3B1D13FB8900F4E25E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BCD23E401D13FB8900F4E25E /* SegueExtension.framework */,
-				BCD23E421D13FB8900F4E25E /* SegueExtensionTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -192,7 +181,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				BCD23E491D13FD3800F4E25E /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -247,6 +235,7 @@
 				TargetAttributes = {
 					BCD23DB51D13F2E900F4E25E = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = HQ576M92UA;
 						LastSwiftMigration = 0800;
 					};
 					BCD23DC91D13F2E900F4E25E = {
@@ -274,8 +263,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = BCD23E3B1D13FB8900F4E25E /* Products */;
-					ProjectRef = BCD23E3A1D13FB8900F4E25E /* SegueExtension.xcodeproj */;
+					ProductGroup = 943AA8891DE0455000E0C146 /* Products */;
+					ProjectRef = 943AA8881DE0455000E0C146 /* SegueExtension.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -288,18 +277,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		BCD23E401D13FB8900F4E25E /* SegueExtension.framework */ = {
+		943AA88E1DE0455100E0C146 /* SegueExtension.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SegueExtension.framework;
-			remoteRef = BCD23E3F1D13FB8900F4E25E /* PBXContainerItemProxy */;
+			remoteRef = 943AA88D1DE0455100E0C146 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		BCD23E421D13FB8900F4E25E /* SegueExtensionTests.xctest */ = {
+		943AA8901DE0455100E0C146 /* SegueExtensionTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = SegueExtensionTests.xctest;
-			remoteRef = BCD23E411D13FB8900F4E25E /* PBXContainerItemProxy */;
+			remoteRef = 943AA88F1DE0455100E0C146 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -337,7 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCD23E521D14348300F4E25E /* SecondViewController.swift in Sources */,
-				BCD23DBC1D13F2E900F4E25E /* ViewController.swift in Sources */,
+				BCD23DBC1D13F2E900F4E25E /* FirstViewController.swift in Sources */,
 				BCD23DBA1D13F2E900F4E25E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,11 +359,6 @@
 			isa = PBXTargetDependency;
 			target = BCD23DB51D13F2E900F4E25E /* Example */;
 			targetProxy = BCD23DD61D13F2E900F4E25E /* PBXContainerItemProxy */;
-		};
-		BCD23E491D13FD3800F4E25E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SegueExtension;
-			targetProxy = BCD23E481D13FD3800F4E25E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -492,6 +476,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = HQ576M92UA;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Tutu.Example;
@@ -504,6 +489,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = HQ576M92UA;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Tutu.Example;

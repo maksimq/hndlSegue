@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FirstViewController.swift
 //  Example
 //
 //  Created by matyushenko on 17.06.16.
@@ -24,20 +24,23 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.performSegueWithIdentifier("TestSegueID", sender: "SomeSender" as AnyObject?){_, _ in
+    override func viewDidAppear(_ animated: Bool) {
+        performSegue(withIdentifier: "TestSegueID", sender: "SomeSender"){_, _ in
             print("It's work")
             self.result = "It's work"
         }
-        print(self.result)
-        self.performSegueWithIdentifier("TestSegueID", sender: "SomeSender" as AnyObject?){_, _ in
+        print(self.result ?? "-")
+        performSegue(withIdentifier: "TestSegueID", sender: "SomeSender"){_, _ in
             print("It's work second time")
         }
-        print(self.result)
-        self.performSegue(withIdentifier: "TestSegueID", sender: "SomeSender")
+        print(self.result ?? "-")
+        
+        performSegue(withIdentifier: "TestSegueID", sender: "SomeSender")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        print(self.result)
+    // default action for segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let isOriginMethodInvoked = true
+        let originMethodInvokeCount = 1
     }
 }

@@ -30,26 +30,26 @@ class TestedSubViewController: TestedViewController {
         isOverrideMethodInvoked = false
         originMethodInvokeCount = 0
         
-        self.performSegue(withIdentifier: segueID, sender: sender)
+        performSegue(withIdentifier: segueID, sender: sender)
         testDelegate?.checkOverrideMethodIncoked(1, forController: self)
         
-        self.performSegueWithIdentifier(segueID, sender: sender as AnyObject?) { segue, sender in
+        performSegue(withIdentifier: segueID, sender: sender) { [unowned self] segue, sender in
             self.isHandlerInvoked = true
             self.handlerInvokeCount += 1
-            self.sender = "FirstHandler" as AnyObject
+            self.sender = "FirstHandler"
         }
-        testDelegate?.checkHandlerBlockInvokedOnceForSender("FirstHandler" as AnyObject?, forController: self)
+        testDelegate?.checkHandlerBlockInvokedOnceForSender("FirstHandler", forController: self)
        
         handlerInvokeCount = 0
         isHandlerInvoked = false
         
-        self.performSegueWithIdentifier(segueID, sender: sender as AnyObject?) { segue, sender in
+        performSegue(withIdentifier: segueID, sender: sender) { [unowned self] segue, sender in
             self.isHandlerInvoked = true
             self.handlerInvokeCount += 1
-            self.sender = "SecondSender" as AnyObject
+            self.sender = "SecondSender"
         }
         
-        testDelegate?.checkHandlerBlockInvokedOnceForSender("SecondSender" as AnyObject?, forController: self)
+        testDelegate?.checkHandlerBlockInvokedOnceForSender("SecondSender", forController: self)
         testDelegate?.checkOverrideMethodIncoked(3, forController: self)
     }
     
